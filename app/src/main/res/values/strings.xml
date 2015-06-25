@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MapIntegrationApp</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_title">Menú principal</string>
+    <string name="menu_map_button">Mapa</string>
+    <string name="menu_bases_button">Bases</string>
+    <string name="menu_statistics_button">Estadísticas</string>
+    <string name="main_collection_button">Colección</string>
+    <string name="main_options_button">Opciones</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="no_fused">The fused location provider is not available</string>
+
+</resources>
