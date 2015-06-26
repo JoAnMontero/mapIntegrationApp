@@ -13,7 +13,7 @@ import uo.sdm.mapintegrationapp.model.Collectible;
 import uo.sdm.mapintegrationapp.persistence.tables.CollectibleTable;
 
 /**
- * Created by Adrián on 26/06/2015.
+ * Created by Adrian on 26/06/2015.
  */
 public class CollectibleDataSource {
 

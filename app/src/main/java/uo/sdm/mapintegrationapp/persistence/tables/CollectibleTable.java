@@ -3,7 +3,7 @@ package uo.sdm.mapintegrationapp.persistence.tables;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * Created by Adrián on 26/06/2015.
+ * Created by Adrian on 26/06/2015.
  */
 public class CollectibleTable {
     public static final String NAME = "collectible";

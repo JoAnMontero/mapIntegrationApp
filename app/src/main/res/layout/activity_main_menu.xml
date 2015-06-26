@@ -9,7 +9,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context=".MainMenu"
-    android:gravity="center_horizontal|center">
+    android:gravity="center_horizontal|center"
+    android:weightSum="1"
+    android:background="@android:color/white">
 
     <TextView
         android:id="@+id/menu_label"
@@ -18,17 +20,21 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/menu_title" />
 
-    <Button
+    <ImageButton
         android:id="@+id/menu_map_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/menu_map_button"
-        android:onClick="launchMapActivity" />
+        android:onClick="launchMapActivity"
+        android:src="@drawable/img_button_game"
+        android:background="@android:color/transparent"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/main_collection_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="launchCollectionActivity"
+        android:src="@drawable/img_button_coll"
+        android:background="@android:color/transparent"
         android:text="@string/main_collection_button" />
 
     <Button

@@ -12,5 +12,6 @@
     <string name="main_options_button">Opciones</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="no_fused">The fused location provider is not available</string>
+    <string name="title_activity_collection">CollectionActivity</string>
 
 </resources>

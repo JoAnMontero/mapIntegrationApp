@@ -13,6 +13,7 @@ import uo.sdm.mapintegrationapp.persistence.PlacesDataSource;
 
 /**
  * Manager que extiende la funcionalidad del mapa y se encarga de gestionarlo.
+ * Hola, soy jose y me gustan los hombres maduritos.
  * <p/>
  * Created by Hans on 27/12/2014.
  */

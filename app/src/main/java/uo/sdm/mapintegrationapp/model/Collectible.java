@@ -1,7 +1,7 @@
 package uo.sdm.mapintegrationapp.model;
 
 /**
- * Created by Adrián on 26/06/2015.
+ * Created by Adrian on 26/06/2015.
  */
 public class Collectible {
     private Long id;

@@ -57,6 +57,11 @@ public class MainMenu extends ActionBarActivity {
         startActivity(mIntent);
     }
 
+    public void launchCollectionActivity(View view){
+        final Intent mIntent = new Intent(MainMenu.this,MapActivity.class);
+        startActivity(mIntent);
+    }
+
     // TODO move to a debug layout
     public void clearDB(View view) {
         PlacesDataSource dataSource = new PlacesDataSource(this);
