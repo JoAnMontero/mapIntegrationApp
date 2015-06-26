@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import uo.sdm.mapintegrationapp.persistence.tables.RuinTable;
+import uo.sdm.mapintegrationapp.persistence.tables.PlacesTable;
 
 /**
  * Created by Hans on 25/06/2015.
@@ -14,8 +14,13 @@ public class WorldDatabaseHelper extends SQLiteOpenHelper {
     private static final String LOG_TAG = "WorldDB";
 
     private static final String DATABASE_NAME = "world.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
+    public static final String[] DEPRECATED_TABLES_DROPS = {
+            "DROP TABLE IF EXISTS ruins",
+            "DROP TABLE IF EXISTS artifacts",
+            "DROP TABLE IF EXISTS zones"
+    };
     public WorldDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -23,14 +28,15 @@ public class WorldDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // TODO add initial data
-        RuinTable.onCreate(db);
+        PlacesTable.onCreate(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.w(LOG_TAG, "Upgrading database from version " + oldVersion +
                 " to version " + newVersion + ", all old data will be destroyed.");
-        // TODO wipe deprecated tables
-        RuinTable.onUpgrade(db, oldVersion, newVersion);
+        for(String drop : DEPRECATED_TABLES_DROPS)
+            db.execSQL(drop);
+        PlacesTable.onUpgrade(db, oldVersion, newVersion);
     }
 }

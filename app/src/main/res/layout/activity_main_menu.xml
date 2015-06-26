@@ -32,22 +32,15 @@
         android:text="@string/main_collection_button" />
 
     <Button
-        android:id="@+id/main_filldb_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rellenar"
-        android:onClick="fillDB" />
-
-    <Button
         android:id="@+id/main_cleardb_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Limpiar"
         android:onClick="clearDB" />
+
     <TextView
         android:id="@+id/main_dbcount_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/menu_title" />
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 </LinearLayout>

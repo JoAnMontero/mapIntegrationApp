@@ -13,6 +13,7 @@ import java.util.List;
 import uo.sdm.mapintegrationapp.persistence.ZoneDB;
 import uo.sdm.mapintegrationapp.persistence.ZoneGateway;
 
+@Deprecated
 public class ZoneGatewayImpl implements ZoneGateway{
     public static final String TABLE = ZoneDB.TABLE_ZONES.NAME;
 

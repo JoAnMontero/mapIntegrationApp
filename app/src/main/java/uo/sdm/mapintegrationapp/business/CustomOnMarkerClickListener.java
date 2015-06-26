@@ -55,7 +55,7 @@ public class CustomOnMarkerClickListener implements GoogleMap.OnMarkerClickListe
                     }
                 });
                 break;
-            case Ruin:
+            case Place:
                 // TODO add the ruin research popup window
                 // TODO add the research in progress popup window
                 // TODO add the finish research popup window

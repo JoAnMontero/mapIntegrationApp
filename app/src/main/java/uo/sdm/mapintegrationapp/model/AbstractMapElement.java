@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 /**
  * Created by Hans on 23/06/2015.
  */
+@Deprecated
 public abstract class AbstractMapElement {
     private GoogleMap gameMap = null;
     private LatLng latLng = null;
