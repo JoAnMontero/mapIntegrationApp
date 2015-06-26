@@ -31,7 +31,7 @@
             android:name=".ui.MapActivity"
             android:label="@string/title_activity_map"
             android:parentActivityName=".ui.MainMenu"
-            android:screenOrientation="landscape">
+            android:screenOrientation="sensor">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uo.sdm.mapintegrationapp.ui.MainMenu" />

@@ -42,6 +42,7 @@ public class CustomOnMarkerClickListener implements GoogleMap.OnMarkerClickListe
         // Check the kind of marker that has been clicked, show different popups (or no popup at all)
         switch (MapElementType.valueOf(marker.getTitle())) {
             case Character:
+                // TODO tweak the options showing at the player marker
                 // Obtain the view to be displayed inside the popup
                 popupView = inflater.inflate(R.layout.research_popup,null);
 
@@ -55,6 +56,9 @@ public class CustomOnMarkerClickListener implements GoogleMap.OnMarkerClickListe
                 });
                 break;
             case Ruin:
+                // TODO add the ruin research popup window
+                // TODO add the research in progress popup window
+                // TODO add the finish research popup window
                 break;
             case Camp:
                 break;

@@ -51,7 +51,7 @@ public class MapActivity extends ActionBarActivity implements
         mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(10 * 1000)        // 10 seconds, in milliseconds
-                .setFastestInterval(1 * 1000); // 1 second, in milliseconds
+                .setFastestInterval(1000); // 1 second, in milliseconds
     }
 
 
@@ -75,24 +75,6 @@ public class MapActivity extends ActionBarActivity implements
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * Inicialize the mapview
-     */
-    private void createMapManager() {
-        try {
-            if (gameMap == null) {
-                gameMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-                        .getMap();
-
-                if (gameMap == null) {
-                    Toast.makeText(getApplicationContext(), "Error en la creación del mapa", Toast.LENGTH_SHORT).show();
-                }
-            }
-        } catch (NullPointerException exception) {
-            Log.e(R.string.app_name + " createMapView", exception.toString());
-        }
     }
 
     @Override
@@ -144,7 +126,6 @@ public class MapActivity extends ActionBarActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-        initializeMapIfNeeded();
         mGoogleApiClient.connect();
     }
 
