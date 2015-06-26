@@ -7,12 +7,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 /**
  * Created by Hans on 24/06/2015.
  */
-public class CampMapElement extends AbstractMapElement{
+public class CampMapElement {
     protected CampMapElement(GoogleMap gameMap, LatLng latLng) {
-        super(gameMap, latLng);
+
     }
 
-    @Override
     protected MarkerOptions createMarkerOptionsOnAddToMap() {
         return null;
     }

@@ -9,6 +9,7 @@ import uo.sdm.mapintegrationapp.persistence.ZoneDB;
 /**
  * Created by Adrián on 11/01/2015.
  */
+@Deprecated
 public class ArtifactGateway {
 
     private SQLiteDatabase database;

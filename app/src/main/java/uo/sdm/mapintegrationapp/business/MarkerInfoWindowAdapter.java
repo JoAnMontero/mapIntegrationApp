@@ -31,7 +31,7 @@ public class MarkerInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
             case Character:
                 infoView = inflater.inflate(R.layout.research_info_window, null);
                 break;
-            case Ruin:
+            case Place:
                 break;
             case Camp:
                 break;

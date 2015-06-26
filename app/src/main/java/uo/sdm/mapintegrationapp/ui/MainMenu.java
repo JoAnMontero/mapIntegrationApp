@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import uo.sdm.mapintegrationapp.R;
-import uo.sdm.mapintegrationapp.model.types.RuinType;
-import uo.sdm.mapintegrationapp.persistence.RuinsDataSource;
+import uo.sdm.mapintegrationapp.model.types.PlaceType;
+import uo.sdm.mapintegrationapp.persistence.PlacesDataSource;
 
 
 public class MainMenu extends ActionBarActivity {
@@ -22,10 +22,10 @@ public class MainMenu extends ActionBarActivity {
         setContentView(R.layout.activity_main_menu);
 
         // TODO move to a debug layout
-        RuinsDataSource dataSource = new RuinsDataSource(this);
+        PlacesDataSource dataSource = new PlacesDataSource(this);
         textView = (TextView) findViewById(R.id.main_dbcount_label);
         dataSource.open();
-        textView.setText(String.valueOf(dataSource.getAllRuins().size()));
+        textView.setText(String.valueOf(dataSource.getAllPlaces().size()));
         dataSource.close();
     }
 
@@ -57,33 +57,12 @@ public class MainMenu extends ActionBarActivity {
         startActivity(mIntent);
     }
 
-    // TODO remove once the db initial data is implemented
-    public void fillDB(View view) {
-        RuinsDataSource dataSource = new RuinsDataSource(this);
-        dataSource.open();
-        dataSource.createRuin(43.537686, -5.687766, RuinType.Pyramid, 0);
-        dataSource.createRuin(43.537786, -5.687766, RuinType.Pyramid, 0);
-        dataSource.createRuin(43.537886, -5.687766, RuinType.Temple, 0);
-        dataSource.createRuin(43.537986, -5.687766, RuinType.Temple, 0);
-        dataSource.createRuin(43.538086, -5.687766, RuinType.Fortress, 0);
-        dataSource.createRuin(43.538186, -5.687766, RuinType.Fortress, 0);
-        dataSource.close();
-
-        dataSource.open();
-        textView.setText(String.valueOf(dataSource.getAllRuins().size()));
-        dataSource.close();
-    }
-
     // TODO move to a debug layout
     public void clearDB(View view) {
-        RuinsDataSource dataSource = new RuinsDataSource(this);
+        PlacesDataSource dataSource = new PlacesDataSource(this);
         dataSource.open();
-        dataSource.deleteAllRuins();
-        dataSource.close();
-
-
-        dataSource.open();
-        textView.setText(String.valueOf(dataSource.getAllRuins().size()));
+        dataSource.deleteAllPlaces();
+        textView.setText(String.valueOf(dataSource.getAllPlaces().size()));
         dataSource.close();
     }
 }
