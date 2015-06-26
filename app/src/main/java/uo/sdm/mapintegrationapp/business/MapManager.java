@@ -20,6 +20,8 @@ import uo.sdm.mapintegrationapp.persistence.PlacesDataSource;
 public class MapManager {
     private static final String LOG_TAG = "MapManager";
 
+    public static final int MINIMUM_PLACES_IN_RANGE = 3;
+
     private GoogleMap gameMap;
     private Activity activity;
 
@@ -28,7 +30,7 @@ public class MapManager {
     public MapManager(Activity activity, GoogleMap gameMap) {
         this.activity = activity;
         this.gameMap = gameMap;
-        this.markerCollection =  new MarkerCollection(gameMap);
+        this.markerCollection =  new MarkerCollection(activity,gameMap);
     }
 
     public void setGameMap(GoogleMap gameMap) {
@@ -54,12 +56,11 @@ public class MapManager {
         markerCollection.moveCharacterTp(location);
 
         // Load the places already discovered from the database
-        PlacesDataSource dataSource = new PlacesDataSource(activity);
-        dataSource.open();
-        markerCollection.refreshPlaces(dataSource.getAllPlaces());
-        dataSource.close();
+        markerCollection.refreshPlaces();
 
-        // TODO Find new places in case there's no nearby ones, load em into the map and into the database
+        //  Generate nearby places if there are not enough 
+        if(markerCollection.getPlacesInRange() < MINIMUM_PLACES_IN_RANGE)
+            markerCollection.generatePlacesInRange(MINIMUM_PLACES_IN_RANGE - markerCollection.getPlacesInRange());
 
         // Move the camera to the player location
         CameraPosition cameraPosition = new CameraPosition.Builder()
