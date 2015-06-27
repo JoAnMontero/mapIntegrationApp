@@ -18,6 +18,13 @@ public class Collectible {
         this.amount = amount;
     }
 
+    public Collectible(Integer type,String name, String category, Integer amount) {
+        this.type = type;
+        this.name = name;
+        this.category = category;
+        this.amount = amount;
+    }
+
     public Long getId() {
         return id;
     }
