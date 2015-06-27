@@ -1,5 +1,10 @@
 package uo.sdm.mapintegrationapp.model.types;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 import uo.sdm.mapintegrationapp.R;
 
 /**
@@ -13,6 +18,10 @@ public enum PlaceType {
     Garden(R.drawable.garden, R.drawable.garden_grey),
     Mountain(R.drawable.mountain, R.drawable.mountain_grey),
     River(R.drawable.river, R.drawable.river_grey);
+
+    private static final List<PlaceType> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
+    private static  final int SIZE = VALUES.size();
+    private static  final Random RANDOM = new Random();
 
     private final int resource_id;
     private final int greyResource_id;
@@ -28,5 +37,9 @@ public enum PlaceType {
 
     public int getGreyResource_id() {
         return greyResource_id;
+    }
+
+    public static PlaceType randomPlaceType() {
+        return VALUES.get(RANDOM.nextInt(SIZE));
     }
 }

@@ -41,7 +41,7 @@
         android:id="@+id/main_cleardb_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Limpiar"
+        android:text="Clean DB"
         android:onClick="clearDB" />
 
     <TextView

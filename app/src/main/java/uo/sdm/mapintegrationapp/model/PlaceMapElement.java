@@ -18,6 +18,7 @@ public class PlaceMapElement {
     private Marker marker = null;
     Place place = null;
     Location characterLocation;
+    boolean inRange = false;
 
     public LatLng getLatLng() {
         return place.getLatLng();
@@ -27,8 +28,13 @@ public class PlaceMapElement {
         return place.getLocation();
     }
 
+    public boolean isInRange() {
+        return inRange;
+    }
+
     public void setCharacterLocation(Location location) {
         this.characterLocation = location;
+        inRange = (place.distanceTo(characterLocation) < 250) ? true : false;
     }
 
     public PlaceMapElement(GoogleMap gameMap, Place place, Location characterLocation) {
@@ -40,7 +46,7 @@ public class PlaceMapElement {
             throw new IllegalArgumentException("The Location received is not initialized to a valid value.");
         this.gameMap = gameMap;
         this.place = place;
-        this.characterLocation = characterLocation;
+        setCharacterLocation(characterLocation);
     }
 
     public void addToMap() {
@@ -66,8 +72,7 @@ public class PlaceMapElement {
         // TODO maybe: add resources for researched places.
         // Selects the highlighted icon for places that are close to the character
         // and the grey icon for places that are too far.
-        return (place.distanceTo(characterLocation) < 250) ?
-                place.getType().getResource_id() : place.getType().getGreyResource_id();
+        return (isInRange()) ? place.getType().getResource_id() : place.getType().getGreyResource_id();
     }
 
     public void updateIcon() {
