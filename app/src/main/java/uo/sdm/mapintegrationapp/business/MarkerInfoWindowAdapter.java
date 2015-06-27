@@ -29,7 +29,7 @@ public class MarkerInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         View infoView = null;
         switch (MapElementType.valueOf(marker.getTitle())) {
             case Character:
-                infoView = inflater.inflate(R.layout.research_info_window, null);
+                //infoView = inflater.inflate(R.layout.research_info_window, null);
                 break;
             case Place:
                 break;

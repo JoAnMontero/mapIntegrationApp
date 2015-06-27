@@ -8,13 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
+import org.w3c.dom.Text;
+
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
+
 import uo.sdm.mapintegrationapp.R;
+import uo.sdm.mapintegrationapp.model.PlaceMapElement;
 import uo.sdm.mapintegrationapp.model.types.MapElementType;
 
 /**
@@ -22,14 +29,14 @@ import uo.sdm.mapintegrationapp.model.types.MapElementType;
  */
 public class CustomOnMarkerClickListener implements GoogleMap.OnMarkerClickListener {
 
-    private final LayoutInflater inflater;
+    private final Activity activity;
     private final GoogleMap gameMap;
-    private Activity activity;
+    private final MarkerCollection markerCollection;
 
-    public CustomOnMarkerClickListener(LayoutInflater inflater, GoogleMap gameMap, Activity activity) {
-        this.inflater = inflater;
-        this.gameMap = gameMap;
+    public CustomOnMarkerClickListener(Activity activity, GoogleMap gameMap, MarkerCollection markerCollection) {
         this.activity = activity;
+        this.gameMap = gameMap;
+        this.markerCollection = markerCollection;
     }
 
     @Override
@@ -43,24 +50,73 @@ public class CustomOnMarkerClickListener implements GoogleMap.OnMarkerClickListe
         switch (MapElementType.valueOf(marker.getTitle())) {
             case Character:
                 // TODO tweak the options showing at the player marker
-                // Obtain the view to be displayed inside the popup
-                popupView = inflater.inflate(R.layout.research_popup,null);
-
-                // A button that dismisses the popup
-                Button btnDismiss = (Button) popupView.findViewById(R.id.researchPopup_button);
-                btnDismiss.setOnClickListener(new Button.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        popupWindow.dismiss();
-                    }
-                });
                 break;
             case Place:
-                // TODO add the ruin research popup window
-                // TODO add the research in progress popup window
-                // TODO add the finish research popup window
+                final PlaceMapElement placeMapElement = markerCollection.findPlaceById(Long.parseLong(marker.getSnippet()));
+                if (!placeMapElement.isResearching()) {
+                    // Obtain the view to be displayed inside the popup
+                    popupView = activity.getLayoutInflater().inflate(R.layout.place_research_popup, null);
+
+                    // A button that starts the research of a zone
+                    Button research = (Button) popupView.findViewById(R.id.research);
+                    research.setOnClickListener(new Button.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            placeMapElement.startResearching(activity);
+                            popupWindow.dismiss();
+                        }
+                    });
+
+                    // A button that dismisses the popup
+                    Button dismiss = (Button) popupView.findViewById(R.id.dismiss);
+                    dismiss.setOnClickListener(new Button.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popupWindow.dismiss();
+                        }
+                    });
+                } else {
+                    long millisLeft = placeMapElement.getResearchEnd() - System.currentTimeMillis();
+                    if (millisLeft > 0) {
+                        // Obtain the view to be displayed inside the popup
+                        popupView = activity.getLayoutInflater().inflate(R.layout.place_research_in_progress_popup, null);
+
+                        // A text view that shows the research time left
+                        TextView timeLeft = (TextView) popupView.findViewById(R.id.time_left);
+                        timeLeft.setText(String.format("%d min, %d sec",
+                                TimeUnit.MILLISECONDS.toMinutes(millisLeft),
+                                TimeUnit.MILLISECONDS.toSeconds(millisLeft) -
+                                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisLeft))
+                        ));
+
+                        // A button that dismisses the popup
+                        Button dismiss = (Button) popupView.findViewById(R.id.dismiss);
+                        dismiss.setOnClickListener(new Button.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popupWindow.dismiss();
+                            }
+                        });
+
+                    } else {
+
+                        // TODO drop the card, show the card, play a sound
+                        // Obtain the view to be displayed inside the popup
+                        popupView = activity.getLayoutInflater().inflate(R.layout.place_research_completed_popup, null);
+
+                        // A button that dismisses the popup
+                        Button dismiss = (Button) popupView.findViewById(R.id.dismiss);
+                        dismiss.setOnClickListener(new Button.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popupWindow.dismiss();
+                            }
+                        });
+                    }
+                }
                 break;
             case Camp:
+                // TODO add camps
                 break;
         }
 

@@ -12,9 +12,6 @@ import com.google.android.gms.maps.model.LatLng;
 import uo.sdm.mapintegrationapp.persistence.PlacesDataSource;
 
 /**
- * Manager que extiende la funcionalidad del mapa y se encarga de gestionarlo.
- * Hola, soy jose y me gustan los hombres maduritos.
- * <p/>
  * Created by Hans on 27/12/2014.
  */
 public class MapManager {
@@ -41,7 +38,7 @@ public class MapManager {
         gameMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         // Setting up the listener that shows popups on marker click
-        gameMap.setOnMarkerClickListener(new CustomOnMarkerClickListener(activity.getLayoutInflater(), gameMap, activity));
+        gameMap.setOnMarkerClickListener(new CustomOnMarkerClickListener(activity, gameMap, markerCollection));
 
         // Setting up an adapter to show custom InfoWindows on marker click
         gameMap.setInfoWindowAdapter(new MarkerInfoWindowAdapter(activity.getLayoutInflater()));

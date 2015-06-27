@@ -1,5 +1,6 @@
 package uo.sdm.mapintegrationapp.model;
 
+import android.content.Context;
 import android.location.Location;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -8,7 +9,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.List;
+
 import uo.sdm.mapintegrationapp.model.types.MapElementType;
+import uo.sdm.mapintegrationapp.model.types.PlaceType;
+import uo.sdm.mapintegrationapp.persistence.PlacesDataSource;
 
 /**
  * Created by Hans on 23/06/2015.
@@ -20,12 +25,32 @@ public class PlaceMapElement {
     Location characterLocation;
     boolean inRange = false;
 
+    public long getId() {
+        return place.getId();
+    }
+
+    public String getMarkerId() {
+        return marker.getId();
+    }
+
     public LatLng getLatLng() {
         return place.getLatLng();
     }
 
     public Location getLocation() {
         return place.getLocation();
+    }
+
+    public PlaceType getType() {
+        return place.getType();
+    }
+
+    public boolean isResearching() {
+        return place.isResearching();
+    }
+
+    public long getResearchEnd() {
+        return place.getResearch_end();
     }
 
     public boolean isInRange() {
@@ -64,7 +89,7 @@ public class PlaceMapElement {
         return new MarkerOptions()
                 .position(getLatLng())
                 .title(MapElementType.Place.toString())
-                .snippet(place.getType().toString())
+                .snippet(place.getId() + "")
                 .icon(BitmapDescriptorFactory.fromResource(resource_id));
     }
 
@@ -77,5 +102,15 @@ public class PlaceMapElement {
 
     public void updateIcon() {
         marker.setIcon(BitmapDescriptorFactory.fromResource(getResourceId()));
+    }
+
+    public void startResearching(Context context) {
+        place.setResearching(true);
+        place.setResearch_end(System.currentTimeMillis() + (1 * 60 * 1000)); // 30 minutes
+
+        PlacesDataSource dataSource = new PlacesDataSource(context);
+        dataSource.open();
+        dataSource.update(place);
+        dataSource.close();
     }
 }

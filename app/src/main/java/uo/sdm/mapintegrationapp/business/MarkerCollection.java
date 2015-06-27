@@ -100,4 +100,11 @@ public class MarkerCollection {
             }
         }
     }
+
+    public PlaceMapElement findPlaceById(long placeId) {
+        for(PlaceMapElement mapElement : placeMapElements)
+            if (mapElement.getId() == placeId)
+                return mapElement;
+        return null;
+    }
 }

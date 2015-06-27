@@ -44,7 +44,7 @@ public class PlacesDataSource {
         dbHelper.close();
     }
 
-    public Place createPlace(double lat, double lng, PlaceType type,boolean researching, long research_end) {
+    public Place createPlace(double lat, double lng, PlaceType type, boolean researching, long research_end) {
         final ContentValues values = new ContentValues();
 
         values.put(PlacesTable.COLUMN_LATITUDE, lat);
@@ -84,7 +84,7 @@ public class PlacesDataSource {
         research_end = cursor.getLong(5);
         cursor.close();
 
-        return (researching == false)? null:research_end;
+        return (researching == false) ? null : research_end;
     }
 
     public List<Place> getAllPlaces() {

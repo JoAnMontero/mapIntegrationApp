@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/researchPopup"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:id="@+id/place_research_popup"
     android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@android:color/background_light">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="1dp"
         android:background="@android:color/darker_gray">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,18 +22,33 @@
             android:layout_gravity="center_horizontal|center">
 
             <TextView
-                android:id="@+id/researchPopup_label"
-                android:layout_width="fill_parent"
+                android:id="@+id/label"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Research"
                 android:textColor="@android:color/black"
-                android:gravity="center"/>
+                android:gravity="center" />
 
-            <Button
-                android:id="@+id/researchPopup_button"
-                android:layout_width="fill_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Close" />
+                android:orientation="horizontal"
+                android:layout_margin="20dp"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal|center">
+
+                <Button
+                    android:id="@+id/research"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Research" />
+
+                <Button
+                    android:id="@+id/dismiss"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Close" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
