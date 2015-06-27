@@ -10,6 +10,7 @@ public class CollectibleTable {
 
     public static final String COLUMN_ID = "_id";           //Id of row.
     public static final String COLUMN_TYPE = "type";        //each cards.
+    public static final String COLUMN_NAME = "name";        //Name D:
     public static final String COLUMN_CATEGORY = "category";      //Category class.
     public static final String COLUMN_AMOUNT = "amount";    //Amount of this type card.
 
@@ -17,6 +18,7 @@ public class CollectibleTable {
             + NAME + "("
             + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_TYPE + " INTEGER NOT NULL, "
+            + COLUMN_NAME +" TEXT NOT NULL, "
             + COLUMN_CATEGORY + " TEXT NOT NULL, "
             + COLUMN_AMOUNT + " INTEGER NOT NULL"
             + ");";

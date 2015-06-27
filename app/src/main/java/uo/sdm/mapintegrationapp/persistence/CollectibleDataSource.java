@@ -25,6 +25,7 @@ public class CollectibleDataSource {
     private final String[] columns = {
             CollectibleTable.COLUMN_ID,
             CollectibleTable.COLUMN_TYPE,
+            CollectibleTable.COLUMN_NAME,
             CollectibleTable.COLUMN_CATEGORY,
             CollectibleTable.COLUMN_AMOUNT
     };
@@ -49,6 +50,7 @@ public class CollectibleDataSource {
         }
         final ContentValues values = new ContentValues();
         values.put(CollectibleTable.COLUMN_TYPE,collectible.getType());
+        values.put(CollectibleTable.COLUMN_NAME,collectible.getName());
         values.put(CollectibleTable.COLUMN_CATEGORY,collectible.getCategory());
         values.put(CollectibleTable.COLUMN_AMOUNT, collectible.getAmount());
         db.insert(CollectibleTable.NAME, null, values);
@@ -73,7 +75,8 @@ public class CollectibleDataSource {
                     cursor.getLong(0),
                     cursor.getInt(1),
                     cursor.getString(2),
-                    cursor.getInt(3)
+                    cursor.getString(3),
+                    cursor.getInt(4)
             );
         }
         cursor.close();
@@ -96,7 +99,8 @@ public class CollectibleDataSource {
                     cursor.getLong(0),
                     cursor.getInt(1),
                     cursor.getString(2),
-                    cursor.getInt(3)
+                    cursor.getString(3),
+                    cursor.getInt(4)
             );
         }
         cursor.close();
@@ -143,7 +147,8 @@ public class CollectibleDataSource {
                         cursor.getLong(0),
                         cursor.getInt(1),
                         cursor.getString(2),
-                        cursor.getInt(3)));
+                        cursor.getString(3),
+                        cursor.getInt(4)));
             } while (cursor.moveToNext());
         }
         cursor.close();

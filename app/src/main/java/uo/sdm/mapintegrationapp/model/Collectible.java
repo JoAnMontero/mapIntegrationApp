@@ -6,12 +6,14 @@ package uo.sdm.mapintegrationapp.model;
 public class Collectible {
     private Long id;
     private Integer type;
+    private String name;
     private String category;
     private Integer amount;
 
-    public Collectible(Long id, Integer type, String category, Integer amount) {
+    public Collectible(Long id, Integer type,String name, String category, Integer amount) {
         this.id = id;
         this.type = type;
+        this.name = name;
         this.category = category;
         this.amount = amount;
     }
@@ -54,5 +56,13 @@ public class Collectible {
     public Collectible incrementAmount(Integer amount){
         this.amount += amount;
         return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
