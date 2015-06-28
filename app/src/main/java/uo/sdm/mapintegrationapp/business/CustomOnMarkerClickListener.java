@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -54,7 +55,7 @@ public class CustomOnMarkerClickListener implements GoogleMap.OnMarkerClickListe
                     return false;
                 if (!placeMapElement.isResearching()) {
                     // Obtain the view to be displayed inside the popup
-                    popupView = activity.getLayoutInflater().inflate(R.layout.popup_research, null);
+                    popupView = activity.getLayoutInflater().inflate(R.layout.popup_research, (LinearLayout)activity.findViewById(R.id.place_research_popup));
 
                     // A button that starts the research of a zone
                     Button research = (Button) popupView.findViewById(R.id.research);
@@ -77,7 +78,7 @@ public class CustomOnMarkerClickListener implements GoogleMap.OnMarkerClickListe
                 } else {
                     if (placeMapElement.getTimeLeft() > 0) {
                         // Obtain the view to be displayed inside the popup
-                        popupView = activity.getLayoutInflater().inflate(R.layout.popup_research_in_progress, null);
+                        popupView = activity.getLayoutInflater().inflate(R.layout.popup_research_in_progress, (LinearLayout)activity.findViewById(R.id.place_research_in_progress_popup));
 
                         // A text view that shows the research time left
                         TextView timeLeft = (TextView) popupView.findViewById(R.id.time_left);
@@ -95,7 +96,7 @@ public class CustomOnMarkerClickListener implements GoogleMap.OnMarkerClickListe
                     } else {
                         // TODO play a sound
                         // Obtain the view to be displayed inside the popup
-                        popupView = activity.getLayoutInflater().inflate(R.layout.popup_research_completed, null);
+                        popupView = activity.getLayoutInflater().inflate(R.layout.popup_research_completed, (LinearLayout)activity.findViewById(R.id.place_research_completed_popup));
 
                         // Restore the place to its default interaction state
                         placeMapElement.setAsResearched(activity);

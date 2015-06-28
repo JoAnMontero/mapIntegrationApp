@@ -26,7 +26,8 @@
         android:layout_height="wrap_content"
         android:onClick="launchMapActivity"
         android:src="@drawable/img_button_game"
-        android:background="@android:color/transparent"/>
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/menu_map_button"/>
 
     <ImageButton
         android:id="@+id/main_collection_button"
@@ -35,5 +36,6 @@
         android:onClick="launchCollectionActivity"
         android:src="@drawable/img_button_coll"
         android:background="@android:color/transparent"
-        android:text="@string/main_collection_button" />
+        android:text="@string/main_collection_button"
+        android:contentDescription="@string/main_collection_button" />
 </LinearLayout>

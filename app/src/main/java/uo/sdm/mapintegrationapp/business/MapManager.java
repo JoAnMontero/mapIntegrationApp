@@ -56,7 +56,7 @@ public class MapManager {
         gameMap.setOnMarkerClickListener(new CustomOnMarkerClickListener(activity, gameMap, markerCollection));
 
         // Setting up an adapter to show custom InfoWindows on marker click
-        gameMap.setInfoWindowAdapter(new MarkerInfoWindowAdapter(activity.getLayoutInflater(), markerCollection));
+        gameMap.setInfoWindowAdapter(new MarkerInfoWindowAdapter(activity, activity.getLayoutInflater(), markerCollection));
     }
 
     public void handleNewLocation(Location location) {

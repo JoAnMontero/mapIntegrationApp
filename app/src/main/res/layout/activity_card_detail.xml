@@ -10,7 +10,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="370dp"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:gravity="center"
         android:background="@drawable/mask">
         <ImageView
@@ -30,66 +30,66 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:layout_gravity="left"
-        android:gravity="left">
+        android:layout_gravity="start"
+        android:gravity="start">
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:text="Name:"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20sp"
             android:textColor="@android:color/white"
             android:id="@+id/card_detail_name"
-            android:textSize="20dp"
-            android:text="TEXT_NAME"/>
+            android:textSize="20sp"
+            android:text="@string/default_text"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:layout_gravity="left"
-        android:gravity="left">
+        android:layout_gravity="start"
+        android:gravity="start">
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:text="Category:"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20sp"
             android:textColor="@android:color/white"
             android:id="@+id/card_detail_category"
-            android:textSize="20dp"
-            android:text="TEXT_CATEGORY"/>
+            android:textSize="20sp"
+            android:text="@string/default_text"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:layout_gravity="left"
-        android:gravity="left">
+        android:layout_gravity="start"
+        android:gravity="start">
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:textSize="20dp"
-            android:text="Amount::"/>
+            android:textSize="20sp"
+            android:text="Amount:"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20sp"
             android:textColor="@android:color/white"
             android:id="@+id/card_detail_amount"
-            android:textSize="20dp"
-            android:text="NUMBER_OF_CARDS"/>
+            android:textSize="20sp"
+            android:text="@string/default_text"/>
     </LinearLayout>
 
 

@@ -12,5 +12,15 @@
     <string name="title_activity_card_detail">CardDetailActivity</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="default_text">default text</string>
+    <string name="research">Research</string>
+    <string name="research_button">Research</string>
+    <string name="dismiss_button">Close</string>
+    <string name="research_completed">Research completed!!</string>
+    <string name="research_in_progress">Research In progress</string>
+    <string name="msg_far_away">This is too far away!!</string>
+    <string name="msg_research_in_progress">"Research in progress: "</string>
+    <string name="msg_research_completed">Research Completed!!</string>
+    <string name="msg_get_closer">Get closer to claim your reward.</string>
 
 </resources>
