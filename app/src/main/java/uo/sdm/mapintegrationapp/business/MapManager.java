@@ -35,6 +35,7 @@ public class MapManager {
         this.activity = activity;
         this.gameMap = gameMap;
         this.markerCollection = new MarkerCollection(activity, gameMap);
+
         maxInteractionDistance = GameParams.getInstance(activity).getProperty("MaxInteractionDistance");
         maxPlaceGenerationDistance = GameParams.getInstance(activity).getProperty("MaxPlaceGenerationDistance");
         minNearbyPlaces = GameParams.getInstance(activity).getProperty("MinNearbyPlaces");
