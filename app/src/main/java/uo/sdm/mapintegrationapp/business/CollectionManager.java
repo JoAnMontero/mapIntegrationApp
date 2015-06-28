@@ -21,7 +21,7 @@ public class CollectionManager {
     public CollectionManager(Activity activity) {
         this.activity = activity;
         ds = new CollectibleDataSource(activity);
-        CardParams.getInstance(activity);
+        cardParams = CardParams.getInstance(activity);
     }
     public Collectible getCollectibleByType(Integer type){
         ds.open();
@@ -56,8 +56,10 @@ public class CollectionManager {
         c = ds.getCollectibleByType(type);
         if(c == null)
             c = ds.addCollectible(new Collectible(type, name, category, 1));
-        else
-            c.incrementAmount(1);ds.updateCollectible(c);
+        else {
+            c.incrementAmount(1);
+            ds.updateCollectible(c);
+        }
         ds.close();
         return c;
     }

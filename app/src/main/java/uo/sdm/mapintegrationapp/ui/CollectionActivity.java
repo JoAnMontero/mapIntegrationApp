@@ -98,10 +98,7 @@ public class CollectionActivity extends Activity {
         Log.v(LOG_TAG, "Collection Activity end.");
     }
 
-    private void initSound() {
-        soundService.start(getApplicationContext(), R.raw.collectheme_1, true, key_collection_theme);
 
-    }
 
     private void initAttributes() {
         vLayout = (LinearLayout) findViewById(R.id.layout_collection);
@@ -162,6 +159,22 @@ public class CollectionActivity extends Activity {
         img_size = CollectionActivity.IMG_SIZE_M;
     }
 
+    private void initSound() {
+        soundService.start(getApplicationContext(), R.raw.collectheme_1, true, key_collection_theme);
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        soundService.start(getApplicationContext(), R.raw.collectheme_1, true, key_collection_theme);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        soundService.start(getApplicationContext(), R.raw.collectheme_1, true, key_collection_theme);
+    }
+
     @Override
     public void onBackPressed() {
         soundService.stop(key_collection_theme);
@@ -172,5 +185,6 @@ public class CollectionActivity extends Activity {
     protected void onPause() {
         super.onPause();
         soundService.stop(key_collection_theme);
+        soundService.restart("KEY_MAIN_THEME");
     }
 }

@@ -52,6 +52,17 @@ public class CardDetailActivity extends Activity {
         loadDetails();
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        soundService.start(getApplicationContext(), R.raw.collectheme_1, true, key_collection_theme);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        soundService.start(getApplicationContext(), R.raw.collectheme_1, true, key_collection_theme);
+    }
 
     @Override
     protected void onPause() {

@@ -132,6 +132,7 @@ public class MapActivity extends ActionBarActivity implements
     @Override
     protected void onResume() {
         super.onResume();
+        soundService.start(getApplicationContext(), R.raw.maptheme_1, true, key_map_theme);
         mGoogleApiClient.connect();
     }
 
@@ -173,6 +174,13 @@ public class MapActivity extends ActionBarActivity implements
     @Override
     public void onBackPressed() {
         soundService.stop(key_map_theme);
+        soundService.restart("KEY_MAIN_THEME");
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        soundService.start(getApplicationContext(), R.raw.maptheme_1, true, key_map_theme);
     }
 }
