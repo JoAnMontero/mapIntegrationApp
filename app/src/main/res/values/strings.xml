@@ -6,7 +6,7 @@
     <string name="menu_title">Menu</string>
     <string name="menu_map_button">Play</string>
     <string name="main_collection_button">Collection</string>
-    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_map">Game Map</string>
     <string name="no_fused">The fused location provider is not available</string>
     <string name="title_activity_collection">CollectionActivity</string>
     <string name="title_activity_card_detail">CardDetailActivity</string>
@@ -22,5 +22,6 @@
     <string name="msg_research_in_progress">"Research in progress: "</string>
     <string name="msg_research_completed">Research Completed!!</string>
     <string name="msg_get_closer">Get closer to claim your reward.</string>
+    <string name="msg_already_researching">You are already researching a lot of places!!</string>
 
 </resources>

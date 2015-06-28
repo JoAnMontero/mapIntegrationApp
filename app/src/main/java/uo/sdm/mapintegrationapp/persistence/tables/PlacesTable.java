@@ -33,56 +33,6 @@ public class PlacesTable {
 
     public static void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE);
-
-        final ContentValues values = new ContentValues();
-        values.put(PlacesTable.COLUMN_LATITUDE, 43.537686);
-        values.put(PlacesTable.COLUMN_LONGITUDE, -5.687766);
-        values.put(PlacesTable.COLUMN_TYPE, PlaceType.Cave.toString());
-        values.put(PlacesTable.COLUMN_RESEARCHING, false);
-        values.put(PlacesTable.COLUMN_RESEARCH_END, 0);
-        db.insert(PlacesTable.TABLE_NAME, null, values);
-
-        values.put(PlacesTable.COLUMN_LATITUDE, 43.538686);
-        values.put(PlacesTable.COLUMN_LONGITUDE, -5.687766);
-        values.put(PlacesTable.COLUMN_TYPE, PlaceType.Desert.toString());
-        values.put(PlacesTable.COLUMN_RESEARCHING, false);
-        values.put(PlacesTable.COLUMN_RESEARCH_END, 0);
-        db.insert(PlacesTable.TABLE_NAME, null, values);
-
-        values.put(PlacesTable.COLUMN_LATITUDE, 43.539686);
-        values.put(PlacesTable.COLUMN_LONGITUDE, -5.687766);
-        values.put(PlacesTable.COLUMN_TYPE, PlaceType.Dungeon.toString());
-        values.put(PlacesTable.COLUMN_RESEARCHING, false);
-        values.put(PlacesTable.COLUMN_RESEARCH_END, 0);
-        db.insert(PlacesTable.TABLE_NAME, null, values);
-
-        values.put(PlacesTable.COLUMN_LATITUDE, 43.540686);
-        values.put(PlacesTable.COLUMN_LONGITUDE, -5.687766);
-        values.put(PlacesTable.COLUMN_TYPE, PlaceType.Forest.toString());
-        values.put(PlacesTable.COLUMN_RESEARCHING, false);
-        values.put(PlacesTable.COLUMN_RESEARCH_END, 0);
-        db.insert(PlacesTable.TABLE_NAME, null, values);
-
-        values.put(PlacesTable.COLUMN_LATITUDE, 43.541686);
-        values.put(PlacesTable.COLUMN_LONGITUDE, -5.687766);
-        values.put(PlacesTable.COLUMN_TYPE, PlaceType.Garden.toString());
-        values.put(PlacesTable.COLUMN_RESEARCHING, false);
-        values.put(PlacesTable.COLUMN_RESEARCH_END, 0);
-        db.insert(PlacesTable.TABLE_NAME, null, values);
-
-        values.put(PlacesTable.COLUMN_LATITUDE, 43.542686);
-        values.put(PlacesTable.COLUMN_LONGITUDE, -5.687766);
-        values.put(PlacesTable.COLUMN_TYPE, PlaceType.Mountain.toString());
-        values.put(PlacesTable.COLUMN_RESEARCHING, false);
-        values.put(PlacesTable.COLUMN_RESEARCH_END, 0);
-        db.insert(PlacesTable.TABLE_NAME, null, values);
-
-        values.put(PlacesTable.COLUMN_LATITUDE, 43.543686);
-        values.put(PlacesTable.COLUMN_LONGITUDE, -5.687766);
-        values.put(PlacesTable.COLUMN_TYPE, PlaceType.River.toString());
-        values.put(PlacesTable.COLUMN_RESEARCHING, false);
-        values.put(PlacesTable.COLUMN_RESEARCH_END, 0);
-        db.insert(PlacesTable.TABLE_NAME, null, values);
     }
 
     public static void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
