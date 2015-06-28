@@ -24,14 +24,19 @@ public class CollectionManager {
         this.activity = activity;
         ds = new CollectibleDataSource(activity);
     }
-
+    public Collectible getCollectibleByType(Integer type){
+        ds.open();
+        Collectible c = ds.getCollectibleByType(type);
+        ds.close();
+        return c;
+    }
     public List<Collectible> getOwnCollectibles(){
         ds.open();
         List<Collectible> list = ds.listCollectibles();
         ds.close();
         return list;
     }
-    public void generateCollection(){
+    public Collectible generateCollection(){
         try {
             Properties props = new Properties();
             AssetManager asset = activity.getAssets();
@@ -44,13 +49,16 @@ public class CollectionManager {
             Integer factor = Integer.parseInt(str[2]);
             if(new Random().nextInt(100)+1 >= factor){
                 ds.open();
-                ds.addCollectible(new Collectible(type,name,category,1));
+                Collectible c = ds.addCollectible(new Collectible(type, name, category, 1));
                 ds.close();
+                return c;
             }
+            return null;
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
+        return null;
     }
 }

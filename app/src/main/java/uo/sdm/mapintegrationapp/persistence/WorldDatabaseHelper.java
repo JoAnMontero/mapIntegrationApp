@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import uo.sdm.mapintegrationapp.persistence.tables.CollectibleTable;
 import uo.sdm.mapintegrationapp.persistence.tables.PlacesTable;
 
 /**
@@ -14,7 +15,7 @@ public class WorldDatabaseHelper extends SQLiteOpenHelper {
     private static final String LOG_TAG = "WorldDB";
 
     private static final String DATABASE_NAME = "world.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 6;
 
     public static final String[] DEPRECATED_TABLES_DROPS = {
             "DROP TABLE IF EXISTS ruins",
@@ -29,6 +30,7 @@ public class WorldDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // TODO add initial data
         PlacesTable.onCreate(db);
+        CollectibleTable.onCreate(db);
     }
 
     @Override

@@ -19,6 +19,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 
 import uo.sdm.mapintegrationapp.R;
 import uo.sdm.mapintegrationapp.business.MapManager;
+import uo.sdm.mapintegrationapp.infrastructure.factories.ServiceFactory;
+import uo.sdm.mapintegrationapp.infrastructure.services.ISoundService;
 
 public class MapActivity extends ActionBarActivity implements
         GoogleApiClient.ConnectionCallbacks,
@@ -28,6 +30,8 @@ public class MapActivity extends ActionBarActivity implements
     public static final String TAG = MapActivity.class.getSimpleName();
     private static final int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 
+    private ISoundService soundService = ServiceFactory.soundService;
+    private static String key_map_theme = "KEY_MAP_THEME";
 
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
@@ -36,10 +40,12 @@ public class MapActivity extends ActionBarActivity implements
     private GoogleMap gameMap;
     private MapManager mapManager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        initSound();
         initializeMapIfNeeded();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -159,5 +165,14 @@ public class MapActivity extends ActionBarActivity implements
                 finish();
             }
         }
+    }
+    private void initSound(){
+        soundService.start(getApplicationContext(),R.raw.maptheme_1,true,key_map_theme);
+    }
+
+    @Override
+    public void onBackPressed() {
+        soundService.stop(key_map_theme);
+        super.onBackPressed();
     }
 }

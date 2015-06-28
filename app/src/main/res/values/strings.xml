@@ -9,5 +9,8 @@
     <string name="title_activity_map">MapActivity</string>
     <string name="no_fused">The fused location provider is not available</string>
     <string name="title_activity_collection">CollectionActivity</string>
+    <string name="title_activity_card_detail">CardDetailActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>
