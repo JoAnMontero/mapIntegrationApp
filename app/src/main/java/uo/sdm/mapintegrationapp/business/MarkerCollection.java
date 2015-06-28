@@ -22,7 +22,7 @@ public class MarkerCollection {
     private final GoogleMap gameMap;
 
     private CharacterMapElement character = null;
-    private List<PlaceMapElement> placeMapElements = new ArrayList<PlaceMapElement>();
+    private List<PlaceMapElement> placeMapElements = new ArrayList<>();
 
     private int placesInRange = 0;
 
@@ -57,7 +57,7 @@ public class MarkerCollection {
         dataSource.close();
 
         placesInRange = 0;
-        placeMapElements = new ArrayList<PlaceMapElement>();
+        placeMapElements = new ArrayList<>();
 
         for (Place place : places) {
             PlaceMapElement marker = new PlaceMapElement(gameMap, place, getCharacterLocation());

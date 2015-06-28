@@ -1,8 +1,10 @@
 package uo.sdm.mapintegrationapp.business;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -19,8 +21,10 @@ import uo.sdm.mapintegrationapp.model.types.MapElementType;
 public class MarkerInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     private final LayoutInflater inflater;
     private final MarkerCollection markerCollection;
+    private final Activity activity;
 
-    public MarkerInfoWindowAdapter(LayoutInflater inflater, MarkerCollection markerCollection) {
+    public MarkerInfoWindowAdapter(Activity activity, LayoutInflater inflater, MarkerCollection markerCollection) {
+        this.activity = activity;
         this.inflater = inflater;
         this.markerCollection = markerCollection;
     }
@@ -39,20 +43,20 @@ public class MarkerInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
             case Place:
                 PlaceMapElement place = markerCollection.findPlaceById(Long.parseLong(marker.getSnippet()));
 
-                infoView = inflater.inflate(R.layout.infowindow_places, null);
+                infoView = inflater.inflate(R.layout.infowindow_places, (LinearLayout)activity.findViewById(R.id.info_window_places));
                 TextView label = (TextView) infoView.findViewById(R.id.label);
                 label.setText(place.getType().toString());
 
                 TextView infoLabel = (TextView) infoView.findViewById(R.id.info_label);
                 if (!place.isResearching())
-                    infoLabel.setText("This is too far away!!");
+                    infoLabel.setText(activity.getString(R.string.msg_far_away));
                 else {
                     if (place.getTimeLeft() > 0)
-                        infoLabel.setText("Research in progress: " + place.getFormattedTimeLeft());
+                        infoLabel.setText(activity.getString(R.string.msg_research_in_progress) + place.getFormattedTimeLeft());
                     else {
-                        infoLabel.setText("Research Completed!!");
+                        infoLabel.setText(activity.getString(R.string.msg_research_completed));
                         TextView infoLabel2 = (TextView) infoView.findViewById(R.id.info_label2);
-                        infoLabel2.setText("Get closer to claim your reward.");
+                        infoLabel2.setText(activity.getString(R.string.msg_get_closer));
 
                     }
                 }

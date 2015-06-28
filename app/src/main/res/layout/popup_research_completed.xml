@@ -25,7 +25,7 @@
                 android:id="@+id/label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Research completed!!"
+                android:text="@string/research_completed"
                 android:textColor="@android:color/black"
                 android:gravity="center" />
 
@@ -39,7 +39,7 @@
                 android:id="@+id/dismiss"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Close" />
+                android:text="@string/dismiss_button" />
         </LinearLayout>
     </LinearLayout>
 
