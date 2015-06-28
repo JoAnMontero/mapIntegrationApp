@@ -7,7 +7,7 @@ import uo.sdm.mapintegrationapp.R;
 import uo.sdm.mapintegrationapp.infrastructure.services.ICardService;
 
 /**
- * Created by Adrián on 28/06/2015.
+ * Created by Adrian on 28/06/2015.
  */
 public class CardService implements ICardService {
     @Override

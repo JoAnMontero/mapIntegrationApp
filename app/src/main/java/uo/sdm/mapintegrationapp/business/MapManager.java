@@ -22,6 +22,7 @@ public class MapManager {
 
     private MarkerCollection markerCollection;
 
+    public static int maxConcurrentResearches;
     public static int maxInteractionDistance;
     public static int maxPlaceGenerationDistance;
     public static int minNearbyPlaces;
@@ -36,6 +37,7 @@ public class MapManager {
         this.gameMap = gameMap;
         this.markerCollection = new MarkerCollection(activity, gameMap);
 
+        maxConcurrentResearches = GameParams.getInstance(activity).getProperty("MaxConcurrentResearches");
         maxInteractionDistance = GameParams.getInstance(activity).getProperty("MaxInteractionDistance");
         maxPlaceGenerationDistance = GameParams.getInstance(activity).getProperty("MaxPlaceGenerationDistance");
         minNearbyPlaces = GameParams.getInstance(activity).getProperty("MinNearbyPlaces");

@@ -48,7 +48,8 @@ public class CustomOnMarkerClickListener implements GoogleMap.OnMarkerClickListe
         switch (MapElementType.valueOf(marker.getTitle())) {
             case Character:
                 // TODO tweak the options showing at the player marker
-                break;
+                return true;
+                //break;
             case Place:
                 final PlaceMapElement placeMapElement = markerCollection.findPlaceById(Long.parseLong(marker.getSnippet()));
                 if (!placeMapElement.isInRange())
@@ -75,6 +76,13 @@ public class CustomOnMarkerClickListener implements GoogleMap.OnMarkerClickListe
                             popupWindow.dismiss();
                         }
                     });
+
+
+                    if(markerCollection.getCurrentActiveResearches() >= MapManager.maxConcurrentResearches) {
+                        TextView label = (TextView) popupView.findViewById(R.id.label);
+                        label.setText(activity.getString(R.string.msg_already_researching));
+                        research.setEnabled(false);
+                    }
                 } else {
                     if (placeMapElement.getTimeLeft() > 0) {
                         // Obtain the view to be displayed inside the popup

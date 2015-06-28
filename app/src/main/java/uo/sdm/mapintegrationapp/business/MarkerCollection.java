@@ -102,9 +102,19 @@ public class MarkerCollection {
     }
 
     public PlaceMapElement findPlaceById(long placeId) {
-        for(PlaceMapElement mapElement : placeMapElements)
+        for (PlaceMapElement mapElement : placeMapElements)
             if (mapElement.getId() == placeId)
                 return mapElement;
         return null;
+    }
+
+    public int getCurrentActiveResearches() {
+        int activeResearches = 0;
+        for (PlaceMapElement placeMapElement : placeMapElements) {
+            if (placeMapElement.isResearching() && placeMapElement.getTimeLeft() > 0)
+                activeResearches++;
+        }
+
+        return activeResearches;
     }
 }
