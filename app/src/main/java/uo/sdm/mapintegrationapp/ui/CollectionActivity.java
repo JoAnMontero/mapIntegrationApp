@@ -71,16 +71,12 @@ public class CollectionActivity extends Activity {
         Integer elementsAdded = 0;
         for (int i = 0; i < numOfHLayouts; i++) {
             hLayout = createHLinearLayout();
-<<<<<<< HEAD
             for(int j = 0; j < imgPerRow && elementsAdded < elements.size(); j++){
-=======
-            for (int j = 0; j < imgPerRow && elementsAdded < elements.size(); j++) {
                 Integer id = getResources().getIdentifier(
                         "card_" + elements.get(elementsAdded).getType(),
                         "drawable",
                         CollectionActivity.this.getPackageName());
                 Drawable img = getResources().getDrawable(id);
->>>>>>> 487960586bf318d68d53448057a0017fc848230f
                 ImageButton imgButton = createImageButton(elements.get(elementsAdded).getType());
                 imgButton.setImageDrawable(elements.get(elementsAdded).getCardImage(getApplicationContext()));
                 hLayout.addView(imgButton, bLParams);
@@ -126,17 +122,11 @@ public class CollectionActivity extends Activity {
         return (screenWidth / img_size) + 1;
     }
 
-<<<<<<< HEAD
-    private int getNumOfHLayouts(int numOfElements, int elementsPerRow){
-        return numOfElements%elementsPerRow == 0
-                ? numOfElements/elementsPerRow
-                : numOfElements/elementsPerRow+1;
-=======
+
     private int getNumOfHLayouts(int numOfElements, int elementsPerRow) {
         return numOfElements % elementsPerRow == 0
                 ? numOfElements / elementsPerRow
                 : numOfElements / elementsPerRow + 1;
->>>>>>> 487960586bf318d68d53448057a0017fc848230f
     }
 
     private LinearLayout createHLinearLayout() {
