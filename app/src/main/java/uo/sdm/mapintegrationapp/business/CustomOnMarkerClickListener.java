@@ -102,15 +102,9 @@ public class CustomOnMarkerClickListener implements GoogleMap.OnMarkerClickListe
 
                         // Generate a new random collectible
                         Collectible collectible = new CollectionManager(activity).generateCollection();
-                        Integer id = activity.getResources().getIdentifier(
-                                "card_" + collectible.getType(),
-                                "drawable",
-                                activity.getPackageName());
 
-                        // Show the collectible in the Image View
-                        Drawable img = activity.getResources().getDrawable(id);
                         ImageView image = (ImageView) popupView.findViewById(R.id.image);
-                        image.setImageDrawable(img);
+                        image.setImageDrawable(collectible.getCardImage(activity));
 
                         // A button that dismisses the popup
                         Button dismiss = (Button) popupView.findViewById(R.id.dismiss);

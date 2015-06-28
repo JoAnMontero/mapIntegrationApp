@@ -10,10 +10,17 @@ import android.widget.TextView;
 
 import uo.sdm.mapintegrationapp.R;
 import uo.sdm.mapintegrationapp.business.CollectionManager;
+import uo.sdm.mapintegrationapp.infrastructure.factories.ServiceFactory;
+import uo.sdm.mapintegrationapp.infrastructure.services.ICardService;
+import uo.sdm.mapintegrationapp.infrastructure.services.ISoundService;
+import uo.sdm.mapintegrationapp.infrastructure.services.imp.CardService;
 import uo.sdm.mapintegrationapp.model.Collectible;
 
 public class CardDetailActivity extends ActionBarActivity {
+    private static String key_collection_theme = "KEY_COLLECTION_THEME";
 
+    //Services
+    private ISoundService soundService = ServiceFactory.soundService;
     private CollectionManager collectionManager;
     private ImageView imageView;
     private TextView textViewName;
@@ -35,13 +42,7 @@ public class CardDetailActivity extends ActionBarActivity {
         textViewName.setText(c.getName());
         textViewCategory.setText(c.getCategory());
         textViewAmount.setText(c.getAmount().toString());
-
-        Integer id = getResources().getIdentifier(
-                "card_" + type,
-                "drawable",
-                CardDetailActivity.this.getPackageName());
-        Drawable img = getResources().getDrawable(id);
-        imageView.setImageDrawable(img);
+        imageView.setImageDrawable(c.getCardImage(getApplicationContext()));
     }
 
     @Override
@@ -72,5 +73,11 @@ public class CardDetailActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        soundService.stop(key_collection_theme);
     }
 }

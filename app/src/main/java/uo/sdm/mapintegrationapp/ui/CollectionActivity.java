@@ -20,6 +20,7 @@ import java.util.List;
 import uo.sdm.mapintegrationapp.R;
 import uo.sdm.mapintegrationapp.business.CollectionManager;
 import uo.sdm.mapintegrationapp.infrastructure.factories.ServiceFactory;
+import uo.sdm.mapintegrationapp.infrastructure.services.ICardService;
 import uo.sdm.mapintegrationapp.infrastructure.services.ISoundService;
 import uo.sdm.mapintegrationapp.model.Collectible;
 
@@ -29,9 +30,11 @@ public class CollectionActivity extends ActionBarActivity {
     private static int IMG_SIZE_L = 100;
     private static int IMG_SIZE_M = 400;
     private static int IMG_SIZE_H = 600;
-
-    private ISoundService soundService = ServiceFactory.soundService;
     private static String key_collection_theme = "KEY_COLLECTION_THEME";
+
+
+    //Services
+    private ISoundService soundService = ServiceFactory.soundService;
 
     private CollectionManager collectionManager;
     private LinearLayout vLayout; //Vertical
@@ -71,13 +74,8 @@ public class CollectionActivity extends ActionBarActivity {
         for(int i = 0; i < numOfHLayouts; i++){
             hLayout = createHLinearLayout();
             for(int j = 0; j < imgPerRow && elementsAdded < elements.size(); j++){
-                Integer id = getResources().getIdentifier(
-                        "card_" + elements.get(elementsAdded).getType(),
-                        "drawable",
-                        CollectionActivity.this.getPackageName());
-                Drawable img = getResources().getDrawable(id);
                 ImageButton imgButton = createImageButton(elements.get(elementsAdded).getType());
-                imgButton.setImageDrawable(img);
+                imgButton.setImageDrawable(elements.get(elementsAdded).getCardImage(getApplicationContext()));
                 hLayout.addView(imgButton, bLParams);
                 elementsAdded++;
                 Log.v(LOG_TAG,"Has been added "+elementsAdded+" elements.");
@@ -139,6 +137,7 @@ public class CollectionActivity extends ActionBarActivity {
     private int getImagesPerRow(){
         return (screenWidth/img_size)+1;
     }
+
     private int getNumOfHLayouts(int numOfElements, int elementsPerRow){
         return numOfElements%elementsPerRow == 0
                 ? numOfElements/elementsPerRow
@@ -177,5 +176,11 @@ public class CollectionActivity extends ActionBarActivity {
     public void onBackPressed() {
         soundService.stop(key_collection_theme);
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        soundService.stop(key_collection_theme);
     }
 }

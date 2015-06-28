@@ -138,7 +138,7 @@ public class MapActivity extends ActionBarActivity implements
     @Override
     protected void onPause() {
         super.onPause();
-
+        soundService.stop(key_map_theme);
         if (mGoogleApiClient.isConnected()) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
             mGoogleApiClient.disconnect();
@@ -166,8 +166,8 @@ public class MapActivity extends ActionBarActivity implements
             }
         }
     }
-    private void initSound(){
-        soundService.start(getApplicationContext(),R.raw.maptheme_1,true,key_map_theme);
+    private void initSound() {
+        soundService.start(getApplicationContext(), R.raw.maptheme_1,true,key_map_theme);
     }
 
     @Override

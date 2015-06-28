@@ -22,7 +22,6 @@ public class MainMenu extends ActionBarActivity {
     private static String key_main_theme = "KEY_MAIN_THEM";
     private TextView textView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,4 +86,9 @@ public class MainMenu extends ActionBarActivity {
         soundService.start(getApplicationContext(), R.raw.maintheme, true, key_main_theme);
     }
 
+    @Override
+    protected void onPause() {
+        soundService.stop(key_main_theme);
+        super.onPause();
+    }
 }

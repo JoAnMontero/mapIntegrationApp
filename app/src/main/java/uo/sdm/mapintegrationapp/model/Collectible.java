@@ -1,9 +1,17 @@
 package uo.sdm.mapintegrationapp.model;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+
+import uo.sdm.mapintegrationapp.infrastructure.factories.ServiceFactory;
+import uo.sdm.mapintegrationapp.infrastructure.services.ICardService;
+
 /**
  * Created by Adrian on 26/06/2015.
  */
 public class Collectible {
+    private ICardService cardService = ServiceFactory.cardService;
+
     private Long id;
     private Integer type;
     private String name;
@@ -71,5 +79,9 @@ public class Collectible {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Drawable getCardImage(Context context){
+        return cardService.getDrawableCard(this.getType(),"drawable",context.getPackageName(),context);
     }
 }
