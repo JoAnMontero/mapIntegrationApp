@@ -36,17 +36,4 @@
         android:src="@drawable/img_button_coll"
         android:background="@android:color/transparent"
         android:text="@string/main_collection_button" />
-
-    <Button
-        android:id="@+id/main_cleardb_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Clean DB"
-        android:onClick="clearDB" />
-
-    <TextView
-        android:id="@+id/main_dbcount_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 </LinearLayout>

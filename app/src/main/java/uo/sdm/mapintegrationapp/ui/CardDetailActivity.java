@@ -1,10 +1,8 @@
 package uo.sdm.mapintegrationapp.ui;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,8 +14,12 @@ import uo.sdm.mapintegrationapp.infrastructure.services.ISoundService;
 import uo.sdm.mapintegrationapp.infrastructure.services.imp.CardService;
 import uo.sdm.mapintegrationapp.model.Collectible;
 
+<<<<<<< HEAD
 public class CardDetailActivity extends ActionBarActivity {
     private static String key_collection_theme = "KEY_COLLECTION_THEME";
+=======
+public class CardDetailActivity extends Activity {
+>>>>>>> 487960586bf318d68d53448057a0017fc848230f
 
     //Services
     private ISoundService soundService = ServiceFactory.soundService;
@@ -52,6 +54,7 @@ public class CardDetailActivity extends ActionBarActivity {
         initAttributes();
         loadDetails();
     }
+<<<<<<< HEAD
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -80,4 +83,6 @@ public class CardDetailActivity extends ActionBarActivity {
         super.onPause();
         soundService.stop(key_collection_theme);
     }
+=======
+>>>>>>> 487960586bf318d68d53448057a0017fc848230f
 }
