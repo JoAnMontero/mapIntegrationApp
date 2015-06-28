@@ -9,7 +9,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 
-import uo.sdm.mapintegrationapp.persistence.PlacesDataSource;
+import uo.sdm.mapintegrationapp.conf.GameParams;
 
 /**
  * Created by Hans on 27/12/2014.
@@ -17,17 +17,31 @@ import uo.sdm.mapintegrationapp.persistence.PlacesDataSource;
 public class MapManager {
     private static final String LOG_TAG = "MapManager";
 
-    public static final int MINIMUM_PLACES_IN_RANGE = 3;
-
     private GoogleMap gameMap;
     private Activity activity;
 
     private MarkerCollection markerCollection;
 
+    public static int maxInteractionDistance;
+    public static int maxPlaceGenerationDistance;
+    public static int minNearbyPlaces;
+    public static int minPlaceGenerationDistance;
+    public static int placeGenerationWindowSize;
+    public static int placeGenerationWindowOffset;
+    public static int researchTimeInMillis;
+
+
     public MapManager(Activity activity, GoogleMap gameMap) {
         this.activity = activity;
         this.gameMap = gameMap;
-        this.markerCollection =  new MarkerCollection(activity,gameMap);
+        this.markerCollection = new MarkerCollection(activity, gameMap);
+        maxInteractionDistance = GameParams.getInstance(activity).getProperty("MaxInteractionDistance");
+        maxPlaceGenerationDistance = GameParams.getInstance(activity).getProperty("MaxPlaceGenerationDistance");
+        minNearbyPlaces = GameParams.getInstance(activity).getProperty("MinNearbyPlaces");
+        minPlaceGenerationDistance = GameParams.getInstance(activity).getProperty("MinPlaceGenerationDistance");
+        placeGenerationWindowSize = GameParams.getInstance(activity).getProperty("PlaceGenerationWindowSize");
+        placeGenerationWindowOffset = GameParams.getInstance(activity).getProperty("PlaceGenerationWindowOffset");
+        researchTimeInMillis = GameParams.getInstance(activity).getProperty("ResearchTimeInMillis");
     }
 
     public void setGameMap(GoogleMap gameMap) {
@@ -41,7 +55,7 @@ public class MapManager {
         gameMap.setOnMarkerClickListener(new CustomOnMarkerClickListener(activity, gameMap, markerCollection));
 
         // Setting up an adapter to show custom InfoWindows on marker click
-        gameMap.setInfoWindowAdapter(new MarkerInfoWindowAdapter(activity.getLayoutInflater()));
+        gameMap.setInfoWindowAdapter(new MarkerInfoWindowAdapter(activity.getLayoutInflater(), markerCollection));
     }
 
     public void handleNewLocation(Location location) {
@@ -56,8 +70,8 @@ public class MapManager {
         markerCollection.refreshPlaces();
 
         //  Generate nearby places if there are not enough 
-        if(markerCollection.getPlacesInRange() < MINIMUM_PLACES_IN_RANGE)
-            markerCollection.generatePlacesInRange(MINIMUM_PLACES_IN_RANGE - markerCollection.getPlacesInRange());
+        if (markerCollection.getPlacesInRange() < minNearbyPlaces)
+            markerCollection.generatePlacesInRange(minNearbyPlaces - markerCollection.getPlacesInRange());
 
         // Move the camera to the player location
         CameraPosition cameraPosition = new CameraPosition.Builder()

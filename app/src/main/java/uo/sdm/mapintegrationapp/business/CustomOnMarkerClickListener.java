@@ -2,11 +2,12 @@ package uo.sdm.mapintegrationapp.business;
 
 import android.app.Activity;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -15,12 +16,8 @@ import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
-import org.w3c.dom.Text;
-
-import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
-
 import uo.sdm.mapintegrationapp.R;
+import uo.sdm.mapintegrationapp.model.Collectible;
 import uo.sdm.mapintegrationapp.model.PlaceMapElement;
 import uo.sdm.mapintegrationapp.model.types.MapElementType;
 
@@ -53,9 +50,11 @@ public class CustomOnMarkerClickListener implements GoogleMap.OnMarkerClickListe
                 break;
             case Place:
                 final PlaceMapElement placeMapElement = markerCollection.findPlaceById(Long.parseLong(marker.getSnippet()));
+                if (!placeMapElement.isInRange())
+                    return false;
                 if (!placeMapElement.isResearching()) {
                     // Obtain the view to be displayed inside the popup
-                    popupView = activity.getLayoutInflater().inflate(R.layout.place_research_popup, null);
+                    popupView = activity.getLayoutInflater().inflate(R.layout.popup_research, null);
 
                     // A button that starts the research of a zone
                     Button research = (Button) popupView.findViewById(R.id.research);
@@ -76,18 +75,13 @@ public class CustomOnMarkerClickListener implements GoogleMap.OnMarkerClickListe
                         }
                     });
                 } else {
-                    long millisLeft = placeMapElement.getResearchEnd() - System.currentTimeMillis();
-                    if (millisLeft > 0) {
+                    if (placeMapElement.getTimeLeft() > 0) {
                         // Obtain the view to be displayed inside the popup
-                        popupView = activity.getLayoutInflater().inflate(R.layout.place_research_in_progress_popup, null);
+                        popupView = activity.getLayoutInflater().inflate(R.layout.popup_research_in_progress, null);
 
                         // A text view that shows the research time left
                         TextView timeLeft = (TextView) popupView.findViewById(R.id.time_left);
-                        timeLeft.setText(String.format("%d min, %d sec",
-                                TimeUnit.MILLISECONDS.toMinutes(millisLeft),
-                                TimeUnit.MILLISECONDS.toSeconds(millisLeft) -
-                                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisLeft))
-                        ));
+                        timeLeft.setText(placeMapElement.getFormattedTimeLeft());
 
                         // A button that dismisses the popup
                         Button dismiss = (Button) popupView.findViewById(R.id.dismiss);
@@ -99,10 +93,24 @@ public class CustomOnMarkerClickListener implements GoogleMap.OnMarkerClickListe
                         });
 
                     } else {
-
-                        // TODO drop the card, show the card, play a sound
+                        // TODO play a sound
                         // Obtain the view to be displayed inside the popup
-                        popupView = activity.getLayoutInflater().inflate(R.layout.place_research_completed_popup, null);
+                        popupView = activity.getLayoutInflater().inflate(R.layout.popup_research_completed, null);
+
+                        // Restore the place to its default interaction state
+                        placeMapElement.setAsResearched(activity);
+
+                        // Generate a new random collectible
+                        Collectible collectible = new CollectionManager(activity).generateCollection();
+                        Integer id = activity.getResources().getIdentifier(
+                                "card_" + collectible.getType(),
+                                "drawable",
+                                activity.getPackageName());
+
+                        // Show the collectible in the Image View
+                        Drawable img = activity.getResources().getDrawable(id);
+                        ImageView image = (ImageView) popupView.findViewById(R.id.image);
+                        image.setImageDrawable(img);
 
                         // A button that dismisses the popup
                         Button dismiss = (Button) popupView.findViewById(R.id.dismiss);
@@ -124,6 +132,17 @@ public class CustomOnMarkerClickListener implements GoogleMap.OnMarkerClickListe
         if (popupView != null) {
             // Disable the interactions with the map to prevent the marker to move away from the popup
             gameMap.getUiSettings().setAllGesturesEnabled(false);
+            gameMap.getUiSettings().setCompassEnabled(false);
+            gameMap.getUiSettings().setMyLocationButtonEnabled(false);
+            gameMap.getUiSettings().setZoomControlsEnabled(false);
+
+            // Disable interactions with markers.
+            gameMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                    return true;
+                }
+            });
 
             // Assign the view to be displayed by the popup
             popupWindow.setContentView(popupView);
@@ -138,7 +157,12 @@ public class CustomOnMarkerClickListener implements GoogleMap.OnMarkerClickListe
             popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
                 @Override
                 public void onDismiss() {
+                    // Re-enable map interactions
                     gameMap.getUiSettings().setAllGesturesEnabled(true);
+                    gameMap.getUiSettings().setCompassEnabled(true);
+                    gameMap.getUiSettings().setMyLocationButtonEnabled(true);
+                    gameMap.getUiSettings().setZoomControlsEnabled(true);
+                    gameMap.setOnMarkerClickListener(new CustomOnMarkerClickListener(activity, gameMap, markerCollection));
                 }
             });
             // Return true to indicate that the event is consumed.

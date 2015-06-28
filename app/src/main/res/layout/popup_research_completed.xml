@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="1dp"
         android:background="@android:color/darker_gray">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,12 +22,18 @@
             android:layout_gravity="center_horizontal|center">
 
             <TextView
-                android:id="@+id/researchPopup_label"
+                android:id="@+id/label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Research completed!!"
                 android:textColor="@android:color/black"
-                android:gravity="center"/>
+                android:gravity="center" />
+
+            <ImageButton
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter" />
 
             <Button
                 android:id="@+id/dismiss"

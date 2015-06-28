@@ -37,17 +37,32 @@
                 android:value="uo.sdm.mapintegrationapp.ui.MainMenu" />
         </activity>
 
+        <activity
+            android:name=".ui.CollectionActivity"
+            android:label="@string/title_activity_collection"
+            android:parentActivityName=".ui.MainMenu"
+            android:screenOrientation="sensor" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uo.sdm.mapintegrationapp.ui.MainMenu" />
+        </activity>
+
+        <activity
+            android:name=".ui.CardDetailActivity"
+            android:label="@string/title_activity_card_detail"
+            android:parentActivityName=".ui.CollectionActivity"
+            android:screenOrientation="sensor" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uo.sdm.mapintegrationapp.ui.CollectionActivity" />
+        </activity>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyAFtbW6W6GBTrn6l1tyuRLm_64M4raYvdQ" />
-
-        <activity
-            android:name=".ui.CollectionActivity"
-            android:label="@string/title_activity_collection" >
-        </activity>
     </application>
 
 </manifest>

@@ -80,14 +80,14 @@ public class MarkerCollection {
 
     public void generatePlacesInRange(int generatedPlaces) {
         while (generatedPlaces > 0) {
-            int latOffset = (int) ((Math.random() * 4001) - 2001);
-            int lngOffset = (int) ((Math.random() * 4001) - 2001);
+            int latOffset = (int) ((Math.random() * MapManager.placeGenerationWindowSize) - MapManager.placeGenerationWindowOffset);
+            int lngOffset = (int) ((Math.random() * MapManager.placeGenerationWindowSize) - MapManager.placeGenerationWindowOffset);
             Location location = new Location(getCharacterLocation());
             location.setLatitude(location.getLatitude() + (latOffset * 0.000001));
             location.setLongitude(location.getLongitude() + (lngOffset * 0.000001));
 
             float distance = location.distanceTo(getCharacterLocation());
-            if (50 < distance && distance < 250) {
+            if (MapManager.minPlaceGenerationDistance < distance && distance < MapManager.maxPlaceGenerationDistance) {
                 PlacesDataSource dataSource = new PlacesDataSource(context);
                 dataSource.open();
                 Place place = dataSource.createPlace(location.getLatitude(), location.getLongitude(), PlaceType.randomPlaceType(), false, 0);

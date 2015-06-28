@@ -9,8 +9,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import uo.sdm.mapintegrationapp.business.MapManager;
 import uo.sdm.mapintegrationapp.model.types.MapElementType;
 import uo.sdm.mapintegrationapp.model.types.PlaceType;
 import uo.sdm.mapintegrationapp.persistence.PlacesDataSource;
@@ -59,7 +60,20 @@ public class PlaceMapElement {
 
     public void setCharacterLocation(Location location) {
         this.characterLocation = location;
-        inRange = (place.distanceTo(characterLocation) < 250) ? true : false;
+        inRange = (place.distanceTo(characterLocation) < MapManager.maxInteractionDistance) ? true : false;
+    }
+
+    public long getTimeLeft() {
+        return (getResearchEnd() - System.currentTimeMillis());
+    }
+
+    public String getFormattedTimeLeft() {
+        long millisLeft = getTimeLeft();
+        return String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes(millisLeft),
+                TimeUnit.MILLISECONDS.toSeconds(millisLeft) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisLeft)));
+
     }
 
     public PlaceMapElement(GoogleMap gameMap, Place place, Location characterLocation) {
@@ -106,7 +120,17 @@ public class PlaceMapElement {
 
     public void startResearching(Context context) {
         place.setResearching(true);
-        place.setResearch_end(System.currentTimeMillis() + (1 * 60 * 1000)); // 30 minutes
+        place.setResearch_end(System.currentTimeMillis() + MapManager.researchTimeInMillis);
+
+        PlacesDataSource dataSource = new PlacesDataSource(context);
+        dataSource.open();
+        dataSource.update(place);
+        dataSource.close();
+    }
+
+    public void setAsResearched(Context context) {
+        place.setResearching(false);
+        place.setResearch_end(0);
 
         PlacesDataSource dataSource = new PlacesDataSource(context);
         dataSource.open();
