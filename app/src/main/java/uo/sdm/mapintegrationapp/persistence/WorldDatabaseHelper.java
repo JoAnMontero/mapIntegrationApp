@@ -15,7 +15,7 @@ public class WorldDatabaseHelper extends SQLiteOpenHelper {
     private static final String LOG_TAG = "WorldDB";
 
     private static final String DATABASE_NAME = "world.db";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 4;
 
     public static final String[] DEPRECATED_TABLES_DROPS = {
             "DROP TABLE IF EXISTS ruins",

@@ -29,6 +29,7 @@ public class CollectibleTable {
         db.execSQL(CREATE);
 
         final ContentValues values = new ContentValues();
+        /*
         values.put(CollectibleTable.COLUMN_TYPE,1);
         values.put(CollectibleTable.COLUMN_NAME,"name1");
         values.put(CollectibleTable.COLUMN_CATEGORY,"category1");
@@ -82,7 +83,7 @@ public class CollectibleTable {
         values.put(CollectibleTable.COLUMN_CATEGORY,"category18");
         values.put(CollectibleTable.COLUMN_AMOUNT,1);
         db.insert(CollectibleTable.NAME,null,values);
-
+        */
 
     }
 
